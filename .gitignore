@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# ignore Visual Studio code settings
+.vscode/
+
+# ignore assets
+assets/
+assets.zip
