@@ -19,3 +19,5 @@ print(f'# of normal is {b}')
 
 p = 100*a/(a+b)
 print(f'Proportion of anomalous is {round(p,2)}%')
+
+print(normal_count)
