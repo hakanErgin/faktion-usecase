@@ -1,68 +1,60 @@
 import os
 import pandas as pd
 import numpy as np
-import tabulate
-from matplotlib import pyplot as plt
 from sklearn import metrics
 from utils.visualize_substractions import visualize_substractions
 
 
-def classifier_a_step2(path):
-    df = pd.DataFrame(columns=["id", "result"])
-    ids = []
-    datas = []
+def dataframe_a_step2(path):
+    """
+    Builds a dataframe with a row for each picture in the input folder.
+    The 3 columns are the id of the picture (its filename), result and result2 from utils.visualize_substractions
+    :param path: path of the folder containing some pictures
+    :return: a dataframe with 3 columns
+    """
+    df = pd.DataFrame(columns=["id", "result", "result2"])
     for filename in os.listdir(path):
         id = filename[:-4]
-        res = visualize_substractions(inputfile=path+filename)
-        ids.append(id)
-        datas.append(res)
-        dfrow = [id]
-        dfrow.append(res)
-        df.loc[len(df)] = dfrow
-    # plt.hist(df.result)
-    # plt.xlim([0, 1])
-    # plt.title(path)
-    # plt.show()
+        res, res2 = visualize_substractions(inputfile=path+filename, plot=False)
+        data = [id, res, res2]
+        df.loc[len(df)] = data
     return df
 
-
-df_normal = classifier_a_step2(path='./assets/normal_dice/0/')
+# building data frame for normal dice
+df_normal = dataframe_a_step2(path='./assets/normal_dice/0/')
 for i in range(1, 11):
-    df_normal = pd.DataFrame.append(df_normal, classifier_a_step2(path='./assets/normal_dice/'+str(i)+'/'))
-
+    df_normal = pd.DataFrame.append(df_normal, dataframe_a_step2(path='./assets/normal_dice/'+str(i)+'/'))
 df_normal['y_true'] = 0
-df_normal['y_pred'] = np.where(df_normal['result'] < 0.04, 0, 1)
 
-'''print(df_normal.shape)
-print(df_normal.describe())
-plt.hist(df_normal.result)
-#plt.xlim([0, 0.1])
-plt.title('Minimum sum of pixel values - Normal dice only')
-plt.show()'''
-
-
-# df.to_csv('./assets/df_classifier_a_step2.csv', sep=',', index=False, mode='w')
-
-df_anomalous = classifier_a_step2(path='./assets/anomalous_dice/')
+# building data frame for anomalous dice
+df_anomalous = dataframe_a_step2(path='./assets/anomalous_dice/')
 df_anomalous['y_true'] = 1
-df_anomalous['y_pred'] = np.where(df_anomalous['result'] < 0.04, 0, 1)
 
-'''print(df_anomalous.describe())
-
-import math
-w = 0.02
-n = math.ceil((df_anomalous['result'].max() - df_anomalous['result'].min())/w)
-
-plt.hist(df_anomalous.result, bins=n)
-#plt.xlim([0, 0.1])
-plt.title('Minimum sum of pixel values - Anomalous dice only')
-plt.show()'''
-
+# concatenation of the 2 df
 df_global = pd.concat([df_normal, df_anomalous])
-# print(df_global.shape)
-# print(df_global.head(10).to_markdown())
 
+# assigned class by the "model" (y_pred) based on result and result2 values that best discriminate the 2 classes
+df_global['y_pred'] = np.where((df_global['result'] < 0.04) & (df_global['result2'] < 0.14), 0, 1)
+
+
+# classification report and confusion matrix
 report = metrics.classification_report(df_global['y_true'], df_global['y_pred'])
 confus_matrix = metrics.confusion_matrix(df_global['y_true'], df_global['y_pred'])
 print(report)
 print(confus_matrix)
+
+
+def classifier_a_step2(inputfile):
+    """
+    Uses function utils.visualize_substractions to classify between normal (0) and anomalous (1) a single picture.
+    :param inputfile: the complete path to the picture.
+    :return: The assigned class (0 or 1) and a score set to None for compliance reason.
+    """
+    res, res2 = visualize_substractions(inputfile=inputfile, plot=True)
+    class_0_1 = 1
+    if res < 0.04 and res2 < 0.14:
+        class_0_1 = 0
+    score = None
+    return class_0_1, score
+
+print(classifier_a_step2(inputfile='assets/anomalous_dice/img_17584_cropped.jpg'))
