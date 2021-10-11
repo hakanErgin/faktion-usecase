@@ -2,7 +2,7 @@
 <h3>
 Computer vision for anomaly detection in pictures
 </h3>
-<img width = "200" src = /assets/dice.jpg alt="White dice">
+<img width = "200" src = /dice.jpg alt="White dice">
 </div>
 
 <p align="center">
@@ -16,8 +16,8 @@ Computer vision for anomaly detection in pictures
 
 The aim of this (learning) project is to classify pictures of dice as **anomalous vs. normal**:
 <div align = "center">
-<img width = "200" src = /assets/anomalous_synchro.gif alt="Anomalous dice">
-<img width = "200" src = /assets/normal_synchro.gif alt="Normal dice">
+<img width = "200" src = /anomalous_synchro.gif alt="Anomalous dice">
+<img width = "200" src = /normal_synchro.gif alt="Normal dice">
 </div>
 The dice on the left are anomalous while those on the right are normal.
 
