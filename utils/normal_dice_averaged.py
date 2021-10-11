@@ -9,7 +9,7 @@ for j in range(11):
 
     image_data = []
     for img in images:
-        this_image = cv.imread(img, 1)
+        this_image = cv.imread(img, -1)
         image_data.append(this_image)
 
     avg_image = image_data[0]
