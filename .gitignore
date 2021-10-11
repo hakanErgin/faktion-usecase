@@ -132,8 +132,13 @@ dmypy.json
 .vscode/
 
 # ignore assets
-assets/
+assets/*
 assets.zip
+!assets/img/
 
 # ignore linter
 .flake8
+
+# ignore jupyter notebooks
+/jupyter
+

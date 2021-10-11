@@ -1,8 +1,8 @@
 import os
 import pandas as pd
 import numpy as np
-import tabulate
-from matplotlib import pyplot as plt
+# import tabulate
+# from matplotlib import pyplot as plt
 from sklearn import metrics
 from utils.visualize_substractions import visualize_substractions
 
