@@ -1,10 +1,10 @@
-import matplotlib.pyplot as plt
+import os
 import numpy as np
-# import os
-# import PIL
-import tensorflow as tf
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import metrics
 
-# from tensorflow import keras
+import tensorflow as tf
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 
@@ -85,17 +85,18 @@ model.compile(optimizer='adam',
 
 model.summary()
 
-
+# UPD: that was only true for a small original dataset
 # I train with 15 epochs. Takes 4 sec for an epoch => 1 min total time
 # but five epochs are also fine for testing.
-epochs = 15
+epochs = 5
 history = model.fit(
     train_ds,
     validation_data=val_ds,
     epochs=epochs
 )
 
-
+# you may uncomment it to see the plot of training and validation accuracy
+"""
 acc = history.history['accuracy']
 val_acc = history.history['val_accuracy']
 
@@ -104,7 +105,7 @@ val_loss = history.history['val_loss']
 
 epochs_range = range(epochs)
 
-'''plt.figure(figsize=(8, 8))
+plt.figure(figsize=(8, 8))
 plt.subplot(1, 2, 1)
 plt.plot(epochs_range, acc, label='Training Accuracy')
 plt.plot(epochs_range, val_acc, label='Validation Accuracy')
@@ -117,14 +118,10 @@ plt.plot(epochs_range, val_loss, label='Validation Loss')
 plt.legend(loc='upper right')
 plt.title('Training and Validation Loss')
 plt.show()
-'''
+"""
 
-
-
-import os
-import pandas as pd
-import numpy as np
-from sklearn import metrics
+# ============================= #
+# Classification report. Done by Lyes #
 
 
 def classifier_b(path):
