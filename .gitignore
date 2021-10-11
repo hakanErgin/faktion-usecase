@@ -134,3 +134,6 @@ dmypy.json
 # ignore assets
 assets/
 assets.zip
+
+# ignore linter
+.flake8
