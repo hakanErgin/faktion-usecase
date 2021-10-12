@@ -34,14 +34,11 @@ df_anomalous['y_true'] = 1
 df_global = pd.concat([df_normal, df_anomalous])
 
 # assigned class by the "model" (y_pred) based on result and result2 values that best discriminate the 2 classes
-df_global['y_pred'] = np.where((df_global['result'] < 0.04) & (df_global['result2'] < 0.14), 0, 1)
-
+df_global['y_pred'] = np.where((df_global['result'] < 0.045) & (df_global['result2'] < 0.14), 0, 1)
 
 # classification report and confusion matrix
 report = metrics.classification_report(df_global['y_true'], df_global['y_pred'])
 confus_matrix = metrics.confusion_matrix(df_global['y_true'], df_global['y_pred'])
-print(report)
-print(confus_matrix)
 
 
 def classifier_a_step2(inputfile):
@@ -57,4 +54,8 @@ def classifier_a_step2(inputfile):
     score = None
     return class_0_1, score
 
-print(classifier_a_step2(inputfile='assets/anomalous_dice/img_17584_cropped.jpg'))
+if __name__ == '__main__':
+    print(df_global[(df_global['y_pred'] == 0) & (df_global['y_true'] == 1)])
+    print(report)
+    print(confus_matrix)
+    print(classifier_a_step2(inputfile='assets/anomalous_dice/img_17584_cropped.jpg'))
