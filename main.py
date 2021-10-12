@@ -1,14 +1,12 @@
-# welcome to the jungle! :)
 # Anomalous dice detection script.
 # 3 different approaches with OpenCV and TensorFlow.
 # made by Hakan, Lyes, Vadym.
 # check out the repo here https://github.com/hakanErgin/faktion-usecase
 
-# import sys  # to be cool
 
-from utils.option_a_step2_only_copy import report as op1
-from utils.mixed_report import report as op3
-
+# from utils.option_a_step2_only_copy import report as op1
+from src.option_3 import report as op3
+from src.option_1 import classifier_a_step2 as op1
 
 
 def main_flow(file: str = 'hi', method: int = 1, stats: bool = False) -> int:
@@ -19,26 +17,21 @@ def main_flow(file: str = 'hi', method: int = 1, stats: bool = False) -> int:
     Possible method values are <1>, <2>, <3>.
     Set stats to True to see acuracy.
     """
-
+    file = input("please, provide file name: ")
     method = int(input("please, \
 type 1 for OpenCV absdiff method\n\
         type 2 for OpenCV contour method\n\
         type 3 for TensorFlow CNN method: "))
     if method == 1:
         print('running method 1')
-        op1()
+        print(op1(file)[0])
     if method == 3:
         print('running method 3')
         op3()
+    if method == 2:
+        print('running method 2')
+        print('better luck next time')
 
 
 if __name__ == "__main__":
     main_flow()
-import utils.option_a_step2_only
-from utils.option_a_step2_only import classifier_a_step2 as classifier_a
-
-
-#print(utils.option_a_step2_only.confus_matrix)
-#print(utils.option_a_step2_only.report)
-print(classifier_a(inputfile='assets/anomalous_dice/img_17584_cropped.jpg'))
-print(classifier_a(inputfile='assets/anomalous_dice/img_17829_cropped.jpg'))

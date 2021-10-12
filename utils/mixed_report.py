@@ -8,6 +8,7 @@ import tensorflow as tf
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 
+# import joblib
 
 import pathlib
 
@@ -80,12 +81,14 @@ def build_model():
     # UPD: that was only true for a small original dataset
     # I train with 15 epochs. Takes 4 sec for an epoch => 1 min total time
     # but five epochs are also fine for testing.
-    epochs = 1
+    epochs = 8
     history = model.fit(
         train_ds,
         validation_data=val_ds,
         epochs=epochs
     )
+    #joblib.dump(model, 'CNN.pickled')
+    model.save('cnn.pickled')
 
     # you may uncomment it to see the plot of training and validation accuracy
     """
@@ -161,3 +164,5 @@ def report():
     confus_matrix = metrics.confusion_matrix(df_global['y_true'], df_global['y_pred'])
     print(report)
     print(confus_matrix)
+
+build_model()

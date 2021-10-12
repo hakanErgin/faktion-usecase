@@ -20,25 +20,28 @@ def dataframe_a_step2(path):
         df.loc[len(df)] = data
     return df
 
-# building data frame for normal dice
-df_normal = dataframe_a_step2(path='./assets/normal_dice/0/')
-for i in range(1, 11):
-    df_normal = pd.DataFrame.append(df_normal, dataframe_a_step2(path='./assets/normal_dice/'+str(i)+'/'))
-df_normal['y_true'] = 0
+def build():
+    # building data frame for normal dice
+    df_normal = dataframe_a_step2(path='./assets/normal_dice/0/')
+    for i in range(1, 11):
+        df_normal = pd.DataFrame.append(df_normal, dataframe_a_step2(path='./assets/normal_dice/'+str(i)+'/'))
+    df_normal['y_true'] = 0
 
-# building data frame for anomalous dice
-df_anomalous = dataframe_a_step2(path='./assets/anomalous_dice/')
-df_anomalous['y_true'] = 1
+    # building data frame for anomalous dice
+    df_anomalous = dataframe_a_step2(path='./assets/anomalous_dice/')
+    df_anomalous['y_true'] = 1
 
-# concatenation of the 2 df
-df_global = pd.concat([df_normal, df_anomalous])
+    # concatenation of the 2 df
+    df_global = pd.concat([df_normal, df_anomalous])
 
-# assigned class by the "model" (y_pred) based on result and result2 values that best discriminate the 2 classes
-df_global['y_pred'] = np.where((df_global['result'] < 0.045) & (df_global['result2'] < 0.14), 0, 1)
+    # assigned class by the "model" (y_pred) based on result and result2 values that best discriminate the 2 classes
+    df_global['y_pred'] = np.where((df_global['result'] < 0.045) & (df_global['result2'] < 0.14), 0, 1)
 
-# classification report and confusion matrix
-report = metrics.classification_report(df_global['y_true'], df_global['y_pred'])
-confus_matrix = metrics.confusion_matrix(df_global['y_true'], df_global['y_pred'])
+    # classification report and confusion matrix
+    report = metrics.classification_report(df_global['y_true'], df_global['y_pred'])
+    confus_matrix = metrics.confusion_matrix(df_global['y_true'], df_global['y_pred'])
+    print(report, confus_matrix)
+    return df_global
 
 
 def classifier_a_step2(inputfile):
@@ -55,7 +58,6 @@ def classifier_a_step2(inputfile):
     return class_0_1, score
 
 if __name__ == '__main__':
+    df_global = build()
     print(df_global[(df_global['y_pred'] == 0) & (df_global['y_true'] == 1)])
-    print(report)
-    print(confus_matrix)
     print(classifier_a_step2(inputfile='assets/anomalous_dice/img_17584_cropped.jpg'))
