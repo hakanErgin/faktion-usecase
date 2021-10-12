@@ -49,7 +49,7 @@ def classifier_a_step2(inputfile):
     """
     res, res2 = visualize_substractions(inputfile=inputfile, plot=True)
     class_0_1 = 1
-    if res < 0.04 and res2 < 0.14:
+    if res < 0.045 and res2 < 0.14:
         class_0_1 = 0
     score = None
     return class_0_1, score
