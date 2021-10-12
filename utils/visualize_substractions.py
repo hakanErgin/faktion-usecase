@@ -49,13 +49,15 @@ def visualize_substractions(inputfile, plot: bool = False):
     return min_relative_result, min_relative_result2
 
 
-'''print(visualize_substractions(inputfile='assets/normal_dice_20211008/0/img_00923_cropped.jpg', plot=True))
-visualize_substractions(inputfile='assets/normal_dice/6/700.jpg', plot=True)
-visualize_substractions(inputfile='assets/anomalous_dice/img_17516_cropped.jpg', plot=True)
-visualize_substractions(inputfile='assets/anomalous_dice/img_17433_cropped.jpg', plot=True)
-visualize_substractions(inputfile='assets/anomalous_dice/img_17480_cropped.jpg', plot=True)
-visualize_substractions(inputfile='assets/anomalous_dice/img_17583_cropped.jpg', plot=True)
-visualize_substractions(inputfile='assets/anomalous_dice/img_17584_cropped.jpg', plot=True)
-visualize_substractions(inputfile='assets/normal_dice/3/272.jpg', plot=True)
-visualize_substractions(inputfile='assets/normal_dice/6/777.jpg', plot=True)
-visualize_substractions(inputfile='assets/normal_dice/10/1068.jpg', plot=True)'''
+if __name__ == '__main__':
+    print(visualize_substractions(inputfile='assets/normal_dice_20211008/0/img_00923_cropped.jpg', plot=True))
+    visualize_substractions(inputfile='assets/normal_dice/6/700.jpg', plot=True)
+    visualize_substractions(inputfile='assets/anomalous_dice/img_17516_cropped.jpg', plot=True)
+    visualize_substractions(inputfile='assets/anomalous_dice/img_17433_cropped.jpg', plot=True)
+    visualize_substractions(inputfile='assets/anomalous_dice/img_17480_cropped.jpg', plot=True)
+    visualize_substractions(inputfile='assets/anomalous_dice/img_17583_cropped.jpg', plot=True)
+    visualize_substractions(inputfile='assets/anomalous_dice/img_17584_cropped.jpg', plot=True)
+    visualize_substractions(inputfile='assets/normal_dice/3/272.jpg', plot=True)
+    visualize_substractions(inputfile='assets/normal_dice/6/777.jpg', plot=True)
+    visualize_substractions(inputfile='assets/normal_dice/10/1068.jpg', plot=True)
+
