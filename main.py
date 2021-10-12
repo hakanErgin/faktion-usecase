@@ -7,6 +7,7 @@
 # from utils.option_a_step2_only_copy import report as op1
 from src.mixed_report import report as op3
 from src.option_1 import classifier_a_step2 as op1
+from src.classifier import detect_anomaly as op2
 
 
 def main_flow(file: str = 'hi', method: int = 1, stats: bool = False) -> int:
@@ -30,7 +31,8 @@ type 1 for OpenCV absdiff method\n\
         op3()
     if method == 2:
         print('running method 2')
-        print('better luck next time')
+        op2(file)
+
 
 
 if __name__ == "__main__":
