@@ -2,12 +2,12 @@
 <h3>
 Computer vision for anomaly detection in pictures
 </h3>
-<img width = "200" src = /dice.jpg alt="White dice">
+<img width = "200" src = /assets/readme_img/dice.jpg alt="White dice">
 </div>
 
 <p align="center">
   <a href="#the-project">Project</a> •
-  <a href="#data-source">Data source</a> •
+  <a href="#data-source-and-structure">Data source and structure</a> •
   <a href="#our-solutions">Our solutions</a> •
   <a href="#how-to-use">How to use</a>
 </p>
@@ -16,21 +16,30 @@ Computer vision for anomaly detection in pictures
 
 The aim of this (learning) project is to classify pictures of dice as **anomalous vs. normal**:
 <div align = "center">
-<img width = "200" src = /anomalous_synchro.gif alt="Anomalous dice">
-<img width = "200" src = /normal_synchro.gif alt="Normal dice">
+<img width = "200" src = /assets/readme_img/anomalous_synchro.gif alt="Anomalous dice">
+<img width = "200" src = /assets/readme_img/normal_synchro.gif alt="Normal dice">
 </div>
 The dice on the left are anomalous while those on the right are normal.
 
-### Data source
+### Data source and structure
 
 The images used to build this project have been provided by [Faktion](https://www.faktion.com) and are available [here](https://we.tl/t-Rfh9G5fseR).
 Please grab these assets and extract them in the root directory.
-
+```
+.
+├── assets
+|   ├── anomalous_dice
+|   └── normal_dice
+├── utils
+├── .gitignore
+├── main.py
+└── README.md
+```
 ### Our solutions
 
 #### 1. OpenCV manipulations 
 This first approach consists in comparing any input picture of a die to be classified as anomalous vs. normal with _templates_ of normal dice.
-The idea being that if the input die is normal it should show a difference with the templates that is close to "zero". Whereas if the input die is anomalous, there should be a significant residual difference with the templates.
+If the input die is normal it should show a difference with the templates that is close to "zero". Whereas if the input die is anomalous, there should be a significant residual difference with the templates.
 
 We found that the difference - in terms of pixels values - is a fair proxy of the dice class (normal or not) and allows to reach a 0.84 F1-score for the anomalous class on the original dataset.   
 
