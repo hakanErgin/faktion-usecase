@@ -133,6 +133,9 @@ dmypy.json
 
 # ignore assets
 assets/*
+
+!assets/readme_img/
+
 assets.zip
 !assets/img/
 
